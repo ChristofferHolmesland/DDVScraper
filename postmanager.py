@@ -9,13 +9,15 @@ INSERT_STATEMENT = "INSERT INTO PostCase VALUES (?, ?, ?, ?, ?, ?, ?)"
 parser = argparse.ArgumentParser(description="Scrape public post by any municipality using the DDV postlist system")
 parser.add_argument("municipality", type=str)
 parser.add_argument("--min_id", type=int)
-parser.add_argument("--max_id", required=True, type=int)
+parser.add_argument("--max_id", type=int)
+parser.add_argument("--n", type=int)
 parser.add_argument("--print", default="all", type=str, choices=["all", "valid", "none"])
 
 args = parser.parse_args()
 municipality = args.municipality
 min_id = args.min_id or -1
 max_id = args.max_id
+n_search = args.n
 print_option = args.print
 
 conn = sqlite3.connect("{}.db".format(municipality))
@@ -27,7 +29,13 @@ if min_id == -1:
     row = conn.execute("SELECT * FROM PostCase ORDER BY id DESC LIMIT 1").fetchone()
     min_id = 0 if row is None else row[0] + 1
 
-for i in range(min_id, max_id + 1):
+max_range = 0
+if max_id:
+    max_range = max_id + 1
+elif n_search:
+    max_range = min_id + n_search
+
+for i in range(min_id, max_range):
     data = r.get(URL.format(municipality, i))
     valid = data.status_code == 200
 
