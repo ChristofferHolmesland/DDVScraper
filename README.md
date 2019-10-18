@@ -21,9 +21,9 @@ different municipalities easier.
 ## Running
 #### postmanager.py
 ```
-python postmanager.py municipality --min_id=0 --max_id=10 --print=all
+python postmanager.py municipality --n=1000
 ```
-- municipality, the prefix used by the website, e.g. MAN for Mandal, LIN for Lindesnes and KVI for Kvinesdal.
+- municipality, the prefix used by the website, e.g. MAN for Mandal, LIN for Lindesnes and KVI for Kvinesdal. If you want to search multiple municipalities you can seperate them by a comma, e.g. "MAN,LIN,KVI".
 - Optional: min_id, the first id to check. If not supplied, it will start from the previously checked id of that municipality,
 or 0 if this is the first search. Many of them start at 15000+, except Kvinesdal which should be searched from 0.
 - Optional: max_id, the last id to check. You should check the website for your municipality to get an idea of what the max should be.
