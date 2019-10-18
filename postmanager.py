@@ -1,6 +1,7 @@
 import requests as r
 import sqlite3
 import argparse
+import threading
 from bs4 import BeautifulSoup
 
 URL = "https://innsyn.ddv.no/einnsyn{0}/RegistryEntry/Case?caseId={1}"
@@ -65,4 +66,7 @@ if __name__ == "__main__":
     print_option = args.print
 
     for m in municipality:
-        search(m, min_id, max_id, n_search, print_option)
+        t = threading.Thread(
+            target=search,
+            args=(m, min_id, max_id, n_search, print_option))
+        t.start()
