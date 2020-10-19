@@ -1,6 +1,8 @@
 # DDVScraper
 Scrape post from any Norwegian municipality using the DDV post list system
 
+Update: After the merging of some municipalities the script no longer works as they have moved to a different system.
+
 ## Info
 Every Norwegian municipality has a public list of sent and recieved post, like [Mandal Kommune](https://innsyn.ddv.no/einnsynMAN).
 Several of the municipalities in the county Vest Agder uses a system by [DDV](https://ddv.no) to publish the post. Post is generally
